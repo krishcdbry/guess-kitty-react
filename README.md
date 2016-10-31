@@ -14,7 +14,7 @@ Guess kitty is a simple game with reactjs, Where player need to guess the block 
 HTML, CSS, JAVASCRIPT - REACTJS
 
 ## Stage 1
-![Guess Kitty JS](https://raw.githubusercontent.com/krishcdbry/guess-kitty-jsgit in/master/assets/img/guess-kitty-one.png)
+![Guess Kitty JS](https://raw.githubusercontent.com/krishcdbry/guess-kitty-js/master/assets/img/guess-kitty-one.png)
 
 ## Stage N/2
 ![Guess Kitty JS](https://raw.githubusercontent.com/krishcdbry/guess-kitty-js/master/assets/img/guess-kitty-two.png)
