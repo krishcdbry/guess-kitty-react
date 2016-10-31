@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 
+
 class GuessKitty extends Component {
 
     constructor(props) {
         super(props)
+
+        var scores = [];
+
+        if (localStorage.getItem('scores')) {
+            scores = localStorage.getItem('scores').split(',');
+            scores = scores.map(function(item) {
+                return parseInt(item, 10);
+            });
+            this.calculateScoreSummary(scores);
+        }
 
         this.state = {
             NUMBER_OF_BLOCKS: 25
@@ -13,7 +24,7 @@ class GuessKitty extends Component {
             , win : false
             , attempts: 0
             , currentScore: 0
-            , scores : []
+            , scores : scores
             , startGame: false
         };
 
@@ -23,18 +34,22 @@ class GuessKitty extends Component {
         }
     }
 
-    getScoreUpdate() {
-        var length = this.state.scores.length;
-        var scores = this.state.scores;
-        if (length > 0) {
-            this.totalScore = scores.reduce(function(next, prev) {
-                return next + prev;
-            });
-
-            this.avgScore = Math.round(this.totalScore / length);
-            this.minScore = scores.reduce(function(a,b) { return (a < b) ? a : b });
-            this.maxScore = scores.reduce(function(a,b) { return (a > b) ? a : b });
+    calculateScoreSummary(scores) {
+        if (scores.length < 1) {
+            return;
         }
+        this.totalScore = scores.reduce(function(next, prev) {
+            return Number(next) + Number(prev);
+        });
+
+        this.avgScore = Math.round(this.totalScore / scores.length);
+        this.minScore = scores.reduce(function(a,b) { return (a < b) ? a : b });
+        this.maxScore = scores.reduce(function(a,b) { return (a > b) ? a : b });
+    }
+
+    getScoreUpdate() {
+        var scores = this.state.scores;
+        this.calculateScoreSummary(scores);
     }
 
     handleClick(index) {
@@ -55,6 +70,7 @@ class GuessKitty extends Component {
                 , scores: scores
             });
 
+            localStorage.setItem('scores', scores);
             this.getScoreUpdate();
         }
 
@@ -77,6 +93,15 @@ class GuessKitty extends Component {
         this.setState(state);
     }
 
+    clearScores() {
+        this.setState({
+            scores: []
+        });
+
+        localStorage.clear();
+        this.getScoreUpdate();
+    }
+
     startGame() {
         this.setState({
             startGame: true
@@ -86,10 +111,10 @@ class GuessKitty extends Component {
     render() {
         return (
             <div className="App">
-                <div className="App-header">
-                    <h1>Guess Kitty - ReactJs</h1>
-                </div>
                 <center>
+                    <div className="App-header">
+                        <h1>Guess Kitty - ReactJs</h1>
+                    </div>
                     <div className="game-area">
                         <div className={"board " + (this.state.win ? "board won": "")}>
                             {this.state.blocks.map((block, index) => {
@@ -130,9 +155,12 @@ class GuessKitty extends Component {
                                 <b>Worst</b> : {this.minScore}
                             </div>
                         </div>
+                        <p>
+                            <a href="javascript:;" onClick={() => this.clearScores()} className="clear-scores">Clear scores <i className="fa fa-trash"></i></a>
+                        </p>
                     </div>
                 </center>
-                <div className={this.state.startGame ? "wrapper hide-me" : "wrapper"}>
+                <div className={this.state.startGame || this.state.scores.length > 0 ? "wrapper hide-me" : "wrapper"}>
                     <div className="wrapper-content">
                         <center>
                             <br/><br/>
@@ -140,9 +168,11 @@ class GuessKitty extends Component {
 									Guess Kitty
 								</span>
                             <br/><br/><br/>
-                            <img src="assets/img/guess-kitty-one.png" className="screenshots"/>
-                            <img src="assets/img/guess-kitty-two.png" className="screenshots"/>
-                            <img src="assets/img/guess-kitty-three.png" className="screenshots"/>
+                            <div className="intro-data" onClick={() => this.startGame()} >
+                                <img src="assets/img/guess-kitty-one.png" className="screenshots"/>
+                                <img src="assets/img/guess-kitty-two.png" className="screenshots"/>
+                                <img src="assets/img/guess-kitty-three.png" className="screenshots"/>
+                            </div>
                             <br/><br/><br/><br/>
                             <a href="javascript:;" onClick={() => this.startGame()} className="start-game"><span>Start</span> <i className="fa fa-play-circle-o start-button"></i></a>
                             <br/><br/><br/><br/>
