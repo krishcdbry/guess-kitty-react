@@ -31,8 +31,8 @@ class GuessKitty extends Component {
             });
 
             this.avgScore = Math.round(this.totalScore / length);
-            this.minScore = Math.round(scores.sort()[0]);
-            this.maxScore = Math.round(scores.sort()[length - 1]);
+            this.minScore = scores.reduce(function(a,b) { return (a < b) ? a : b });
+            this.maxScore = scores.reduce(function(a,b) { return (a > b) ? a : b });
         }
     }
 
@@ -103,16 +103,26 @@ class GuessKitty extends Component {
                     <h3> ATTEMPTS = {this.state.attempts}/25 </h3>
                     <div className={this.state.scores.length > 0 ? "scores": "scores hide-me"}>
                         <h3>Scores</h3>
-                        <hr></hr>
                         <div className="score-list">
+                            <hr></hr>
                             {this.state.scores.map((score, index) => {
                                 return <p><b>{index+1}.</b> {score}</p>
                             })}
                         </div>
-                        <b>Total</b> : {this.totalScore} <br></br>
-                        <b>Avg</b> : {this.avgScore} <br></br>
-                        <b>Min</b>  : {this.minScore} <br></br>
-                        <b>Max</b> : {this.maxScore} <br></br>
+                        <div className="score-summary">
+                            <div className="score-summary-block">
+                                <b>Total</b> : {this.totalScore}
+                            </div>
+                            <div className="score-summary-block">
+                                <b>Avg</b> :  {this.avgScore}
+                            </div>
+                            <div className="score-summary-block">
+                                <b>Best</b> : {this.maxScore}
+                            </div>
+                            <div className="score-summary-block">
+                                <b>Worst</b> : {this.minScore}
+                            </div>
+                        </div>
                     </div>
                 </center>
             </div>
