@@ -14,6 +14,7 @@ class GuessKitty extends Component {
             , attempts: 0
             , currentScore: 0
             , scores : []
+            , startGame: false
         };
 
         for (var i = 0; i < this.state.NUMBER_OF_BLOCKS; i++) {
@@ -76,6 +77,12 @@ class GuessKitty extends Component {
         this.setState(state);
     }
 
+    startGame() {
+        this.setState({
+            startGame: true
+        })
+    }
+
     render() {
         return (
             <div className="App">
@@ -125,6 +132,23 @@ class GuessKitty extends Component {
                         </div>
                     </div>
                 </center>
+                <div className={this.state.startGame ? "wrapper hide-me" : "wrapper"}>
+                    <div className="wrapper-content">
+                        <center>
+                            <br/><br/>
+                            <span className="wrapper-title">
+									Guess Kitty
+								</span>
+                            <br/><br/><br/>
+                            <img src="assets/img/guess-kitty-one.png" className="screenshots"/>
+                            <img src="assets/img/guess-kitty-two.png" className="screenshots"/>
+                            <img src="assets/img/guess-kitty-three.png" className="screenshots"/>
+                            <br/><br/><br/><br/>
+                            <a href="javascript:;" onClick={() => this.startGame()} className="start-game"><span>Start</span> <i className="fa fa-play-circle-o start-button"></i></a>
+                            <br/><br/><br/><br/>
+                        </center>
+                    </div>
+                </div>
             </div>
         );
     }
