@@ -24,8 +24,8 @@ HTML, CSS, JAVASCRIPT - REACTJS
 
 
 ## Demo
-Demo @[Guess kitty JS](https://krishcdbry.github.io/dom-tag-depth/)
-| https://krishcdbry.github.io/dom-tag-depth/
+Demo @[Guess kitty JS](https://krishcdbry.github.io/guess-kitty-js/)
+| https://krishcdbry.github.io/guess-kitty-js/
 
 ## Author
 Krishcdbry [krishcdbry@gmail.com]
