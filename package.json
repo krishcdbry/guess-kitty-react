@@ -1,18 +1,43 @@
 {
-  "name": "guess-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "guess-kitty",
+  "version": "1.0.0",
+  "description": "Guess kitty game",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-live": "webpack --progress -w",
+    "build-main": "webpack --progress",
+    "build-prod": "set NODE_ENV=production && webpack --config webpack.config.js --progress",
+    "build": "npm run build-main && npm run build-demo -w"
+  },
+  "author": "krishcdbry",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krishcdbry/guess-kitty.git"
+  },
   "devDependencies": {
-    "react-scripts": "0.7.0"
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
+    "font-awesome": "^4.7.0",
+    "node-sass": "^4.7.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.2",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0"
   },
   "dependencies": {
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "install": "^0.10.4"
   }
 }
